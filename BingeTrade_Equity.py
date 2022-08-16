@@ -13,7 +13,7 @@ def authorize():
     session=accessToken.SessionModel(client_id=credentials["client_id"],secret_key=credentials["secret_key"],redirect_uri=credentials["redirect_uri"],response_type="code", grant_type="authorization_code")
     response = session.generate_authcode()
     chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     driver=webdriver.Chrome(chrome_options=chrome_options)
     driver.get(response)
     if WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//div[@class="row mt-3 mx-auto"]'))):
@@ -319,7 +319,9 @@ credentials = {
     "password":"",
     "two_fa":"",
     "pin":""
-    }
+    } 
+
+# User Credentials Go In Here 
 
 nifty_auto = ["NSE:AMARAJABAT-EQ","NSE:ASHOKLEY-EQ","NSE:BAJAJ-AUTO-EQ","NSE:BALKRISIND-EQ","NSE:BHARATFORG-EQ","NSE:EICHERMOT-EQ","NSE:EXIDEIND-EQ","NSE:HEROMOTOCO-EQ","NSE:M&M-EQ","NSE:TATAMOTORS-EQ","NSE:TVSMOTOR-EQ"]
 nifty_bank = ["NSE:AUBANK-EQ","NSE:AXISBANK-EQ","NSE:BANDHANBNK-EQ","NSE:HDFCBANK-EQ","NSE:ICICIBANK-EQ","NSE:INDUSINDBK-EQ","NSE:KOTAKBANK-EQ","NSE:RBLBANK-EQ","NSE:SBIN-EQ"]
@@ -334,8 +336,8 @@ nifty_realty = ["NSE:DLF-EQ","NSE:GODREJPROP-EQ","NSE:OBEROIRLTY-EQ"]
 
 stock_list=[*nifty_auto, *nifty_bank, *nifty_energy, *nifty_finance, *nifty_fmcg, *nifty_it, *nifty_media, *nifty_metal, *nifty_pharma, *nifty_realty]
 index_list = ["NSE:NIFTYAUTO-INDEX","NSE:NIFTYBANK-INDEX","NSE:NIFTYENERGY-INDEX","NSE:NIFTYFINSERVICE-INDEX","NSE:NIFTYFMCG-INDEX","NSE:NIFTYIT-INDEX","NSE:NIFTYMEDIA-INDEX","NSE:NIFTYMETAL-INDEX","NSE:NIFTYPHARMA-INDEX","NSE:NIFTYREALTY-INDEX"]
-candle_duration=900
-capital=10000
+candle_duration=900 # Time Frame In Seconds ( Per Candle )
+capital=10000 # Capital To Be Allocated To The Bot
 
 redisConnPool0 = redis.ConnectionPool(host='localhost', port=6379, db=0)
 redisConnPool1 = redis.ConnectionPool(host='localhost', port=6379, db=1)
